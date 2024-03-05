@@ -1,0 +1,99 @@
+# Default values for poliza.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+namespace: fas
+
+image:
+  repository:
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets:
+  - name: gitlab-registry
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+virtualService:
+  hosts:
+    - api-cluster.ms.stg.bicevida.cl
+  gateways:
+    - api-cluster-private-gateway
+  pathPrefix: /v1/sysreserva/facturacion.*   # aca debe ir la version de la API que se esta construyendo.
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits: # maximo escalable
+     cpu: 200m
+     memory: 512Mi
+  requests: # valor inicial
+     cpu: 100m
+     memory: 120Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 1
+  averageUtilizationCPU: 160
+  averageUtilizationMemory: 342
+
+nodeSelector:
+  lnegocio: sysfin
+
+tolerations: []
+
+affinity: {}
+
+env:
+  - name: DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name:  reportes-ifrs-fas-secret
+        key: user
+  - name: DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name:  reportes-ifrs-fas-secret
+        key: pass
+  - name: DB_HOST
+    valueFrom:
+      secretKeyRef:
+        name:  reportes-ifrs-fas-secret
+        key: host
+  - name: DB_DATABASE
+    valueFrom:
+      secretKeyRef:
+        name:  reportes-ifrs-fas-secret
+        key: db

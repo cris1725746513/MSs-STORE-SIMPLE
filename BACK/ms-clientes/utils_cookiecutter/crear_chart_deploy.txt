@@ -1,0 +1,8 @@
+../chart-clientes/templates/tests/test-connection.yaml
+../chart-clientes/templates/_helpers.tpl
+../chart-clientes/templates/deployment.yaml
+../chart-clientes/templates/hpa.yaml
+../chart-clientes/templates/NOTES.txt
+../chart-clientes/templates/service.yaml
+../chart-clientes/templates/serviceaccount.yaml
+../chart-clientes/templates/virtualService.yaml

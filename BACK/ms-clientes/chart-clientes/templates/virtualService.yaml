@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: !! .Values.namespace ??
+  name: !! include "clientes.fullname" . ??
+spec:
+  !!- with .Values.virtualService.hosts ??
+  hosts:
+    !!- toYaml . | nindent 3 ??
+  !!- end ??
+  !!- with .Values.virtualService.gateways ??
+  gateways:
+    !!- toYaml . | nindent 3 ??
+  !!- end ??
+  http:
+    - match:
+        - uri:
+            regex: !! .Values.virtualService.pathPrefix ??
+      route:
+        - destination:
+            host: !! include "clientes.fullname" . ??
+            port:
+              number: !! .Values.service.port ??
+      headers:
+        request:
+          set:
+            x-forwarded-proto: https
+            x-forwarded-port: "443"

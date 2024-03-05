@@ -1,0 +1,37 @@
+stages:
+  - scanning
+  - app_build
+  - pre_test
+  - container_build
+  - deploy
+  - testing
+  - deploy_prod
+  - release
+
+variables:
+  HELM_PROJECT_NAME: "facturacion"
+  HELM_NAMESPACE: "fas"
+  OPTIONS_HELM: "--timeout 20m"
+  IMAGE_BUILD: "registry.gitlab.com/bice_vida/shared/golden-images/graalvm_for_jdk17:latest"
+  # USE_PROFILES: "true"
+  # NEEDS_UNIT_TESTING: "no"
+  # IMAGE_SONAR: "maven:3.8.4-openjdk-17-slim"
+  # SONAR_PROJECT_KEY: "XXXXX"
+  # COVERAGE_SONAR: "true"
+  # TEST_TYPE_REGRESSION_DEV: "XXXXX"
+  # REPO_TESTING_REGRESSION_DEV: "XXXXX"
+  # BRANCH_TESTING_REGRESSION_DEV: "XXXXX"
+
+#-------------------------------
+# INCLUDES
+#-------------------------------
+include:
+  - project: BICE_Vida/shared/pipelines
+    ref: master
+    file: /pipeline-eks/quarkus_eddieflow.yml
+  - project: BICE_Vida/shared/pipelines
+    ref: master
+    file: /pipeline-checkmarx/checkmarx.yml
+  # - project: BICE_Vida/shared/pipelines
+  #   ref: master
+  #   file: /pipeline-sonarcloud/sonarcloud_maven.yml

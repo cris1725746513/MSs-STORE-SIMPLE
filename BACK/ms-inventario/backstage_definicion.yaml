@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ms-inventario
+  description: AQUI VA UNA BREVE DESCRIPCION DE LO QUE HACE EL MICROSERVICIO
+  links:
+    - url: /v1/sysreserva/inventario/swagger
+      title: Swagger del Microservicio
+      icon: swagger
+    - url: https://bicevida.atlassian.net/wiki/spaces/EE/pages/2010513460/Microservicio+-+Asegurados
+      title: documentacion del servicio (confluence)
+      icon: confluence
+spec:
+  type: service
+  lifecycle: development
+  owner: NOMBRE_DEL_EQUIPO_DESARROLLADOR_DEL_MICROSERVICIO
+  system: NOMBRE DEL COMPONENT BACKSTAGE TIPO SYSTEM AL CUAL ESTA ASOCIADO EL MICROSERVICIO
+  dependsOn:
+    - resource:default/NOMBRE DEL COMPONENT BACKSTAGE TIPO RESOURCE AL CUAL ESTA ASOCIADO EL MICROSERVICIO (GENERALMENTE UNA BASE DE DATOS)
+  providesApis:
+    - NOMBRE DEL COMPONENT BACKSTAGE TIPO API AL CUAL ESTA ASOCIADO EL MICROSERVICIO

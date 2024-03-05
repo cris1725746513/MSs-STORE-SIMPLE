@@ -1,0 +1,8 @@
+../chart-inventario/templates/tests/test-connection.yaml
+../chart-inventario/templates/_helpers.tpl
+../chart-inventario/templates/deployment.yaml
+../chart-inventario/templates/hpa.yaml
+../chart-inventario/templates/NOTES.txt
+../chart-inventario/templates/service.yaml
+../chart-inventario/templates/serviceaccount.yaml
+../chart-inventario/templates/virtualService.yaml

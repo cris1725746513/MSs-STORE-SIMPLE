@@ -1,0 +1,8 @@
+../chart-facturacion/templates/tests/test-connection.yaml
+../chart-facturacion/templates/_helpers.tpl
+../chart-facturacion/templates/deployment.yaml
+../chart-facturacion/templates/hpa.yaml
+../chart-facturacion/templates/NOTES.txt
+../chart-facturacion/templates/service.yaml
+../chart-facturacion/templates/serviceaccount.yaml
+../chart-facturacion/templates/virtualService.yaml

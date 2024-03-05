@@ -1,0 +1,17 @@
+{
+  "branches": ["master"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    ["@semantic-release/exec", {
+      "prepareCmd": "mvn -ntp versions:set -DnewVersion=${nextRelease.version} -DprocessAllModules -DgenerateBackupPoms=false"
+    }],
+    ["@semantic-release/git", {
+      "assets": ["pom.xml"],
+      "message": "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}"
+    }],
+    ["@semantic-release/gitlab", {
+      "gitlabUrl": "https://www.gitlab.com",
+    }]
+  ]
+}
