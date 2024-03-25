@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CrudRoutingModule } from './crud-routing.module';
 import { CrudComponent } from './crud.component';
+import{ClienteComponent} from './cliente/cliente.component'
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
@@ -16,11 +17,17 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
-
+import { FacturacionComponent } from './facturacion/facturacion.component';
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { InputGroupModule } from 'primeng/inputgroup';
+import { MultiSelectModule } from "primeng/multiselect";
 @NgModule({
     imports: [
         CommonModule,
         CrudRoutingModule,
+        AutoCompleteModule,
+        MultiSelectModule,
+        InputGroupModule,
         TableModule,
         FileUploadModule,
         FormsModule,
@@ -36,6 +43,6 @@ import { DialogModule } from 'primeng/dialog';
         InputNumberModule,
         DialogModule
     ],
-    declarations: [CrudComponent]
+    declarations: [CrudComponent,ClienteComponent,FacturacionComponent]
 })
 export class CrudModule { }

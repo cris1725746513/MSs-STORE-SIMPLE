@@ -3,6 +3,8 @@ import { Product } from 'src/app/demo/api/product';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { Categories } from 'src/app/demo/api/categories';
+import { Producto } from 'src/app/demo/api/producto';
 
 @Component({
     templateUrl: './crud.component.html',
@@ -16,13 +18,17 @@ export class CrudComponent implements OnInit {
 
     deleteProductsDialog: boolean = false;
 
-    products: Product[] = [];
+    products: Producto[] = [];
 
-    product: Product = {};
+    categories: Categories[] = [];
 
-    selectedProducts: Product[] = [];
+    product: Producto = {};
+
+    selectedProducts: Producto[] = [];
 
     submitted: boolean = false;
+
+    cantidadAdd : number = 0;
 
     cols: any[] = [];
 
@@ -33,7 +39,11 @@ export class CrudComponent implements OnInit {
     constructor(private productService: ProductService, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.productService.getProducts().then(data => this.products = data);
+        this.productService.getProducts().then(data => this.products = data)
+        .then(data => console.log(data));
+
+        this.productService.getCategories().then(data => this.categories = data)
+        .then(data => console.log(data));
 
         this.cols = [
             { field: 'product', header: 'Product' },
@@ -43,10 +53,12 @@ export class CrudComponent implements OnInit {
             { field: 'inventoryStatus', header: 'Status' }
         ];
 
+
+
+
         this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
+            { label: '12 %', value: true},
+            { label: '0 %', value: false },
         ];
     }
 
@@ -72,14 +84,14 @@ export class CrudComponent implements OnInit {
 
     confirmDeleteSelected() {
         this.deleteProductsDialog = false;
-        this.products = this.products.filter(val => !this.selectedProducts.includes(val));
+        //this.products = this.products.filter(val => !this.selectedProducts.includes(val));
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
         this.selectedProducts = [];
     }
 
     confirmDelete() {
         this.deleteProductDialog = false;
-        this.products = this.products.filter(val => val.id !== this.product.id);
+        //this.products = this.products.filter(val => val.id !== this.product.id);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
         this.product = {};
     }
@@ -92,7 +104,7 @@ export class CrudComponent implements OnInit {
     saveProduct() {
         this.submitted = true;
 
-        if (this.product.name?.trim()) {
+        if (this.product.nombre?.trim()) {
             if (this.product.id) {
                 // @ts-ignore
                 this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
@@ -100,8 +112,8 @@ export class CrudComponent implements OnInit {
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             } else {
                 this.product.id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
+                this.product.codigo = this.createId();
+                this.product.imagen = 'product-placeholder.svg';
                 // @ts-ignore
                 this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
                 this.products.push(this.product);

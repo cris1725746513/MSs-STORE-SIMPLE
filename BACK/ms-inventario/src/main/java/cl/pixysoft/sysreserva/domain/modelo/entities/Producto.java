@@ -29,7 +29,7 @@ public class Producto {
 
     @NotNull
     @Column(name = "existente", nullable = false)
-    private Long existente;
+    private int existente;
 
     @NotNull
     @Column(name = "codigo", nullable = false, length = Integer.MAX_VALUE)
@@ -42,6 +42,21 @@ public class Producto {
     @NotNull
     @Column(name = "costo_proveedor", nullable = false)
     private Double costoProveedor;
+
+    @Column (name = "ruta_imagen")
+    private  String imagen;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria")
+    private Categoria idCategoria;
+
+    public Categoria getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Categoria idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
     public Integer getId() {
         return id;
@@ -83,11 +98,11 @@ public class Producto {
         this.iva = iva;
     }
 
-    public Long getExistente() {
+    public int getExistente() {
         return existente;
     }
 
-    public void setExistente(Long existente) {
+    public void setExistente(int existente) {
         this.existente = existente;
     }
 
@@ -115,4 +130,11 @@ public class Producto {
         this.costoProveedor = costoProveedor;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 }

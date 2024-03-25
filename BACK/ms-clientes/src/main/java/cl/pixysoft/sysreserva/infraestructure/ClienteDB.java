@@ -27,9 +27,16 @@ public class ClienteDB implements ClientePuertoSalida {
     @Retry(maxRetries = 3, delay = 3000)
     @Transactional
     public ClienteDto crearCliente_PuertoSalida(ClienteDto cliente) {
+        Cliente cliente1 = panacheRepository
+                .find("identificacion",cliente.identificacion)
+                .firstResult();
+        if(Objects.nonNull(cliente1)) {
+            return mapper.toDto(null);
+        }
         Cliente clienteEntity = mapper.toEntity(cliente);
         panacheRepository.persist(clienteEntity);
-        return cliente;
+        return mapper.toDto(panacheRepository.
+                find("identificacion",cliente.identificacion).firstResult());
     }
 
     @Override

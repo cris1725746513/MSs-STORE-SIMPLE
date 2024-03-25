@@ -1,3 +1,4 @@
+import {Categories} from './categories'
 interface InventoryStatus {
     label: string;
     value: string;
@@ -10,7 +11,8 @@ export interface Product {
     price?: number;
     quantity?: number;
     inventoryStatus?: InventoryStatus;
-    category?: string;
+    category?: Categories;
     image?: string;
     rating?: number;
 }
+

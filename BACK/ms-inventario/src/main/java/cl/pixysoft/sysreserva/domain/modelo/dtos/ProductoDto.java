@@ -49,5 +49,14 @@ public class ProductoDto  {
     @JsonbProperty("costoProveedor")
     public Double costoProveedor;
 
+    @Schema(required = true, implementation = CategoriaDto.class)
+    @JsonbProperty("categoria")
+    public CategoriaDto idCategoria;
+
+
+    @Schema(implementation = String.class )
+    @JsonbProperty("imagen")
+    public  String imagen;
+
 
 }

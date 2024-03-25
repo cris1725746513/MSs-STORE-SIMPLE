@@ -19,7 +19,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
-            },/*
+            },
             {
                 label: 'UI Components',
                 items: [
@@ -47,7 +47,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
                     { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
                 ]
-            },*/
+            },
             {
                 label: 'Utilities',
                 items: [
@@ -56,7 +56,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Pages',
+                label: 'Movimientos',
                 icon: 'pi pi-fw pi-briefcase',
                 items: [
                     {
@@ -87,20 +87,25 @@ export class AppMenuComponent implements OnInit {
                     },
                     {
                         label: 'Inventario',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
+                        icon: 'pi pi-fw pi-truck',
+                        routerLink: ['/pages/services/inventario']
                     },
                     {
                         label: 'Clientes',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
+                        icon: 'pi pi-fw pi-user',
+                        routerLink: ['/pages/services/clientes']
+                    },
+                    {
+                        label: 'Facturacion',
+                        icon: 'pi pi-fw pi-cart-plus',
+                        routerLink: ['/pages/services/facturacion']
                     },
 
-                    {
+                    /*{
                         label: 'Timeline',
                         icon: 'pi pi-fw pi-calendar',
                         routerLink: ['/pages/timeline']
-                    },
+                    },*/
                     {
                         label: 'Not Found',
                         icon: 'pi pi-fw pi-exclamation-circle',
@@ -113,7 +118,7 @@ export class AppMenuComponent implements OnInit {
                     },
                 ]
             },
-            {
+            /*{
                 label: 'Hierarchy',
                 items: [
                     {
@@ -154,7 +159,7 @@ export class AppMenuComponent implements OnInit {
                         ]
                     }
                 ]
-            },
+            },*/
             {
                 label: 'Get Started',
                 items: [

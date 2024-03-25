@@ -81,7 +81,7 @@ public class ClienteRutas {
                 return Response.status(201).entity(dto).build();
             }else {
                 JsonObject json = Json.createObjectBuilder()
-                        .add("Error", "Cliente no creado")
+                        .add("Error", "El cliente ya se encuentra registrado.")
                         .build();
                 return Response.status(400).entity(json.toString()).build();
             }
