@@ -1,5 +1,8 @@
+import { Factura } from 'src/app/demo/api/factura';
 export interface FormaPago {
-    idFormaPago?: number;
+    id?: number;
     descripcion?: string;
     valor?:number;
+    totalPago?:number;
+    factura?:Factura;
 }

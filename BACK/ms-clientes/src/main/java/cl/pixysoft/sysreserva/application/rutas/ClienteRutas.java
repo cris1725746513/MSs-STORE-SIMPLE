@@ -59,7 +59,10 @@ public class ClienteRutas {
             return Response.status(200).entity(clienteEncontrado).build();
         }
         else{
-            return Response.status(404).build();
+            JsonObject json = Json.createObjectBuilder()
+                    .add("Error", "Cliente no encontrado.")
+                    .build();
+            return Response.status(404).entity(json.toString()).build();
         }
 
     }

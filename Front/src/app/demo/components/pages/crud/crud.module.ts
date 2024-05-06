@@ -21,6 +21,8 @@ import { FacturacionComponent } from './facturacion/facturacion.component';
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { InputGroupModule } from 'primeng/inputgroup';
 import { MultiSelectModule } from "primeng/multiselect";
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 @NgModule({
     imports: [
         CommonModule,
@@ -29,6 +31,8 @@ import { MultiSelectModule } from "primeng/multiselect";
         MultiSelectModule,
         InputGroupModule,
         TableModule,
+        MessagesModule,
+		MessageModule,
         FileUploadModule,
         FormsModule,
         ButtonModule,

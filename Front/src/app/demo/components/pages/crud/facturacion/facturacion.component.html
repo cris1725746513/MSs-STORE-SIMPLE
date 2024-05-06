@@ -5,31 +5,72 @@
 			<div class="p-fluid p-formgrid grid">
 				<div class="col-12 mb-2 lg:col-4 lg:mb-0">
                     <p-inputGroup>
-                        <input type="text" pInputText placeholder="Identificacion" />
-                        <button type="button" pButton icon="pi pi-search"></button>
+                        <input type="text" (keydown)="onKeydownMain($event,2)"   [(ngModel)]="dni" pInputText placeholder="Identificacion" />
+                        <button type="button" [disabled]="!dni" (click)="SeleccionarCliente()" pButton icon="pi pi-search"></button>
                     </p-inputGroup>
 				</div>
 				<div class="field col-12 md:col-8">
-					<input pInputText id="lastname2" type="text" placeholder="Cliente" [disabled]="true"/>
+					<input pInputText id="lastname2" type="text" [(ngModel)]="customer.nombres" placeholder="Cliente" [disabled]="true"/>
 				</div>
 				<div class="field col-12">
-					<input pInputTextarea id="address" rows="4" placeholder="Direccion"[disabled]="true"/>
+					<input pInputTextarea id="address" rows="4" [(ngModel)]="customer.direccion" placeholder="Direccion" [disabled]="true"/>
+				</div>
+                <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+					<input pInputText id="telefono" type="text" [(ngModel)]="customer.telefono" placeholder="Telefono" [disabled]="true"/>
 				</div>
 				<div class="col-12 mb-2 lg:col-4 lg:mb-0">
-					<input pInputText id="city" type="text" placeholder="Email" [disabled]="true"/>
+					<input pInputText id="email" type="text" [(ngModel)]="customer.email" placeholder="Email" [disabled]="true"/>
 				</div>
-
 			</div>
+            <p-dialog [(visible)]="dialogCliente" [style]="{width: '450px'}" header="Detalle de Cliente" [modal]="true" class="p-fluid">
+                <ng-template pTemplate="content">
+                   <div class="field">
+                        <label for="name">Nombres</label>
+                        <input type="text" pInputText id="name" [(ngModel)]="customer.nombres" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !customer.nombres}"/>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !customer.nombres">Nombres  es requerido.</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="dni">Identificacion</label>
+                        <input type="text" pInputText id="dni" [(ngModel)]="customer.identificacion" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !customer.identificacion}"/>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !customer.identificacion">Identificacion  es requerido.</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="telf">Telefono</label>
+                        <input type="text" pInputText id="telf" [(ngModel)]="customer.telefono" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !customer.telefono}"/>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !customer.telefono">Telefono  es requerido.</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" pInputText id="email" [(ngModel)]="customer.email" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !customer.email}"/>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !customer.email">Email  es requerido.</small>
+                    </div>
+                    <div class="field">
+                        <label for="direccion">Direccion</label>
+                        <textarea id="direccion" pInputTextarea [(ngModel)]="customer.direccion" required rows="3" cols="20" autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !customer.direccion}"></textarea>
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && !customer.direccion">Direccion es requerido.</small>
+
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="CancelarCliente()"></button>
+                    <button pButton pRipple label="Seleccionar" icon="pi pi-check" class="p-button-text" (click)="SeleccionarCliente()"></button>
+                </ng-template>
+            </p-dialog>
 		</div>
+
 	</div>
     <div class="col-12">
 		<div class="card">
 			<h5>Detalle de Compra</h5>
-            <p-table #dt1 [value]="productosDetalle" dataKey="id"   [rowHover]="true" styleClass="p-datatable-gridlines"   responsiveLayout="scroll">
+            <p-table #dt1 [value]="productosDetalle" dataKey="id" [rowHover]="true" styleClass="p-datatable-gridlines"   responsiveLayout="scroll">
 				<ng-template pTemplate="caption">
 					<div class="flex justify-content-between flex-column sm:flex-row">
 						<p-inputGroup>
-                            <input type="text" pInputText  [(ngModel)]="codigo" (keydown)="onKeydownMain($event)"  placeholder="Codigo de Producto" />
+                            <input type="text" pInputText  [(ngModel)]="codigo" (keydown)="onKeydownMain($event,1)"  placeholder="Codigo de Producto" />
                             <button type="button" pButton icon="pi pi-search" [disabled]="!codigo" (click)="searchProduct()"></button>
                         </p-inputGroup>
 					</div>
@@ -89,27 +130,26 @@
                     <div class="field col">
                 <div class="field">
                     <label for="name">Nombre</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.nombre" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.nombre}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.nombre">requerido.</small>
+                    <input type="text" pInputText id="name" [(ngModel)]="product.nombre" [disabled]="true"/>
+
                 </div>
             </div>
             <div class="field col">
                 <div class="field">
                     <label for="codigo">Codigo</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.codigo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.codigo}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.codigo">requerido.</small>
+                    <input type="text" pInputText id="name" [(ngModel)]="product.codigo" [disabled]="true"/>
                 </div>
             </div>
         </div>
                 <div class="field">
                     <label for="detalle">Detalle</label>
-                    <textarea id="detalle" pInputTextarea [(ngModel)]="product.detalle" required rows="3" cols="20"></textarea>
+                    <textarea id="detalle" pInputTextarea [(ngModel)]="product.detalle" [disabled]="true" required rows="3" cols="20"></textarea>
                 </div>
 
                 <div class="formgrid grid">
                     <div class="field col">
                         <label for="price">PVP</label>
-                        <p-inputNumber id="price" [(ngModel)]="product.pvp" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+                        <p-inputNumber id="price" [(ngModel)]="product.pvp" mode="currency" [disabled]="true" currency="USD" locale="en-US"></p-inputNumber>
                     </div>
 
                 </div>
@@ -128,8 +168,8 @@
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+                <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Seleccionar" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
             </ng-template>
         </p-dialog>
 
@@ -141,25 +181,27 @@
                 <h5>Detalle de Pago <label for="total">{{getTotal() | currency:'USD':'symbol'}}</label> </h5>
                 <div class="p-fluid p-formgrid grid">
                     <div class="col-12 mb-2 lg:col-4 lg:mb-0">
-                        <p-multiSelect [options]="listaFormaPago" [(ngModel)]="selectedFormaPago" placeholder="Seleccione la forma/s de pago " optionLabel="descripcion" class="multiselect-custom" display="chip">
-                            <ng-template let-forma pTemplate="item">
-                                <div class="flex align-items-center">
-                                    <span class="ml-2">{{forma.descripcion}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
+                        <p-dropdown
+                            inputId="dropdown"
+                            [autoDisplayFirst]="true"
+                            [options]="listaFormaPago"
+                            [(ngModel)]="selectedFormaPago"
+                            optionLabel="descripcion"
+                            placeholder="Seleccione la/s forma/s de pago"
+                ></p-dropdown>
                     </div>
                     <div class="field col-12 md:col-6">
                         <span class="p-float-label">
-                        <input pInputText id="total" [(ngModel)]="selectedFormaPago.valor" type="text"/>
-                        <label for="total">Valor</label>
+                        <p-inputNumber mode="currency" currency="USD" locale="en-US" [disabled]="!this.selectedFormaPago.id" [(ngModel)]="valorPagoFormaPago" id="total" [showButtons]="false" [min]="0" [max]="getValoresdePago()">
+                        </p-inputNumber>
+                        <label for="total">Pago maximo : {{getValoresdePago() | currency:'USD':'symbol'}}</label>
                     </span>
                     </div>
                     <div class="field col-6 md:col-2">
-                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-success"></button>
+                        <button pButton (click)="addFormasPago()"  [disabled]="!this.selectedFormaPago.id || valorPagoFormaPago <= 0" type="button" icon="pi pi-plus" class="p-button-rounded p-button-success"></button>
                     </div>
                     <div class="field col-12 md:col-12">
-                    <p-table #dt1 [value]="formasPagosSelecteds" dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+                    <p-table #dt1 [value]="formasPagosSelecteds" dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
 
                         <ng-template pTemplate="header">
                             <tr>
@@ -171,25 +213,26 @@
                                      </th>
                                      <th style="min-width: 12rem">
                                         <div class="flex justify-content-between align-items-center">
-                                            Valor
+                                            Valor Pagado
                                             </div>
                                          </th>
 
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-customer>
+                        <ng-template pTemplate="body" let-forma let-rowIndex="rowIndex">
                             <tr>
                                 <td>
                                     <div class="flex">
-                                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                        (click)="deleteFormaPago(rowIndex)"></button>
                                     </div>
                                 </td>
                                 <td>
-                                    {{customer.nombre}}
+                                    {{forma.descripcion}}
                                 </td>
 
                                 <td>
-                                    {{customer.direccion | currency:'USD':'symbol'}}
+                                    {{forma.totalPago | currency:'USD':'symbol'}}
                                 </td>
 
                             </tr>
@@ -201,6 +244,44 @@
                         </ng-template>
                     </p-table>
                 </div>
+
+                    <div class="field col-12 md:col-12">
+                        <button pButton pRipple label="GUARDAR COMO PROFORMA"  class="p-button-text" (click)="hideDialogFinalizarCompra()"></button>
+                        <button pButton pRipple label="FINALIZAR COMPRA"  class="p-button-text" (click)="aponeDialogFinalizarCompra()"></button>
+
+                </div>
+
+
+                <p-dialog [(visible)]="finalizarCompraDialog" [style]="{width: '400px'}" header="FINALIZAR COMPRA" [modal]="true" class="p-fluid">
+                    <ng-template pTemplate="content">
+
+                            <div class="field col">
+                        <div class="field">
+                            <label for="name">Subtotal</label>
+                            <input type="text" pInputText id="subtotal" [(ngModel)]="facturaActual.subtotal" [disabled]="true" mode="currency" currency="USD" locale="en-US"/>
+
+                        </div>
+                    </div>
+                    <div class="field col">
+                        <div class="field">
+                            <label for="codigo">IVA</label>
+                            <input type="text" pInputText id="ivaTotal" [(ngModel)]="facturaActual.iva" [disabled]="true"  mode="currency" currency="USD" locale="en-US"/>
+
+                        </div>
+                    </div>
+                    <div class="field col">
+                        <label for="price">TOTAL</label>
+                        <p-inputNumber id="price" [(ngModel)]="facturaActual.total" mode="currency" [disabled]="true" currency="USD" locale="en-US"></p-inputNumber>
+                    </div>
+
+                    </ng-template>
+
+                    <ng-template pTemplate="footer">
+                        <button pButton pRipple label="CANCELAR" icon="pi pi-times" class="p-button-text" (click)="hideDialogFinalizarCompra()"></button>
+                        <button pButton pRipple label="FINALIZAR" icon="pi pi-check" class="p-button-text" (click)="guardarVenta()"></button>
+                    </ng-template>
+                </p-dialog>
+
                 </div>
             </div>
         </div>

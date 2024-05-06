@@ -4,8 +4,9 @@ import { MessagesDemoComponent } from './messagesdemo.component';
 import { MessagesDemoRoutingModule } from './messagesdemo-routing.module';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+
 import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({

@@ -22,6 +22,7 @@ public class ProductoDto  {
     @Schema(required = true, implementation = Integer.class, example = "56")
     @JsonbProperty("id")
     public Integer id;
+
     @Schema(required = true, implementation = String.class)
     @JsonbProperty("nombre")
     public String nombre;

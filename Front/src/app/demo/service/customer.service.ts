@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({providedIn:'root'})
 export class CustomerService{
 
-    baseURL: string = "http://localhost:8080/v1/sysreserva/clientes";
+    baseURL: string = "http://localhost:8081/v1/sysreserva/clientes";
     constructor(private http: HttpClient) { }
 
 
@@ -44,11 +44,8 @@ export class CustomerService{
             "/"+customer.id, customer).toPromise();
     }
 
-    getCustomersByDni(dni:any) {
-        return this.http.get<any>(this.baseURL + '/' + dni)
-            .toPromise()
-            .then(res => res as Customer)
-            .then(data => data);
+    getCustomersByDni(dni:any){
+        return this.http.get<Customer>(this.baseURL + '/' + dni)
     }
     deleteCustomer(id:any){
         return this.http.delete(this.baseURL+'/' + id).toPromise();

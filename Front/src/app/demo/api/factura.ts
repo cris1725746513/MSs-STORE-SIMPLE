@@ -6,7 +6,7 @@ export interface Factura {
     numFactura?:string;
     fechaEmision?: Date;
     cliente?:Customer;
+    subtotal?:number;
     total?:number;
     iva?:number;
-    formaPago?:FormaPago[];
 }
